@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>New Asset</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Agile Assets</value>
+    </caseValues>
+    <fields>
+        <help><!-- This field shows Date value from Asset is available --></help>
+        <label><!-- Available From --></label>
+        <name>AM_Available_From__c</name>
+    </fields>
+    <fields>
+        <help><!-- This Field shows availability of Assets --></help>
+        <label><!-- Available For Allocation --></label>
+        <name>AM_Available_for_allocation__c</name>
+    </fields>
+    <fields>
+        <help><!-- Enter Asset Description --></help>
+        <label><!-- Item Description --></label>
+        <name>AM_Comments__c</name>
+    </fields>
+    <fields>
+        <help><!-- External ID for the asset --></help>
+        <label><!-- Model No. --></label>
+        <name>AM_ID__c</name>
+    </fields>
+    <fields>
+        <help><!-- This field is for Location Lookup --></help>
+        <label><!-- Location --></label>
+        <name>AM_Location__c</name>
+        <relationshipLabel><!-- Agile Assets --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- This checkbox is for Asset status which shows Out Of Service --></help>
+        <label><!-- Out of Service --></label>
+        <name>AM_Out_of_Service__c</name>
+    </fields>
+    <fields>
+        <help><!-- Enter price --></help>
+        <label><!-- Price --></label>
+        <name>AM_Price__c</name>
+    </fields>
+    <fields>
+        <help><!-- It shows status of an Asset --></help>
+        <label><!-- Status --></label>
+        <name>AM_Status__c</name>
+    </fields>
+    <fields>
+        <help><!-- Select type of an Asset --></help>
+        <label><!-- Type --></label>
+        <name>AM_Type__c</name>
+        <picklistValues>
+            <masterLabel>Accessories</masterLabel>
+            <translation><!-- Accessories --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Book</masterLabel>
+            <translation><!-- Book --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Chromebook</masterLabel>
+            <translation><!-- Chromebook --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Desktop</masterLabel>
+            <translation><!-- Desktop --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Domestic Items</masterLabel>
+            <translation><!-- Domestic Items --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>General</masterLabel>
+            <translation><!-- General --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Laptop</masterLabel>
+            <translation><!-- Laptop --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Networking</masterLabel>
+            <translation><!-- Networking --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Office Furniture</masterLabel>
+            <translation><!-- Office Furniture --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- This field calculates Approximate Purchase Value --></help>
+        <label><!-- Approximate Purchase Value --></label>
+        <name>Approximate_Purchase_Value__c</name>
+    </fields>
+    <fields>
+        <label><!-- Assigned --></label>
+        <name>Assigned__c</name>
+    </fields>
+    <fields>
+        <help><!-- This field shows Availability of Assets --></help>
+        <label><!-- Available --></label>
+        <name>Available__c</name>
+    </fields>
+    <fields>
+        <help><!-- Enter Asset Name --></help>
+        <label><!-- Item Name --></label>
+        <name>Item_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- OOSTest_Available --></label>
+        <name>OOSTest_Available__c</name>
+    </fields>
+    <fields>
+        <help><!-- Enter Date of purchase --></help>
+        <label><!-- Purchase Date --></label>
+        <name>Purchase_Date__c</name>
+    </fields>
+    <fields>
+        <help><!-- Enter Quantity of Asset --></help>
+        <label><!-- Quantity --></label>
+        <name>Quantity__c</name>
+    </fields>
+    <fields>
+        <help><!-- It calculates Total cost based on quantity --></help>
+        <label><!-- Total Cost --></label>
+        <name>Total_Cost__c</name>
+    </fields>
+    <fields>
+        <help><!-- Enter Vendor Name --></help>
+        <label><!-- Vendor --></label>
+        <name>Vendor__c</name>
+    </fields>
+    <fields>
+        <help><!-- Select Vendor name --></help>
+        <label><!-- Vendors --></label>
+        <name>Vendors__c</name>
+        <relationshipLabel><!-- Assets --></relationshipLabel>
+    </fields>
+    <layouts>
+        <layout>AM_Asset Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Asset Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <quickActions>
+        <label><!-- Assign --></label>
+        <name>Assign</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Report a problem --></label>
+        <name>Report_a_problem</name>
+    </quickActions>
+    <recordTypes>
+        <label><!-- IT --></label>
+        <name>IT</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Infrastructure --></label>
+        <name>Infrastructure</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Stationary --></label>
+        <name>Stationary</name>
+    </recordTypes>
+    <startsWith>Vowel</startsWith>
+</CustomObjectTranslation>

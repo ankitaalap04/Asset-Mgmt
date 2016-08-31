@@ -1,0 +1,3 @@
+<apex:page controller="CAM_Assets_showAllRec"  action="{!getredirectAssets}">
+ 
+</apex:page>

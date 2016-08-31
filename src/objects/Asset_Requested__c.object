@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>This Object is used to store Asset Request Data</description>
+    <enableActivities>true</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Asset_Category__c</fullName>
+        <description>This field is to store record type submitted by Asset Request field Asset Type</description>
+        <externalId>false</externalId>
+        <inlineHelpText>It Shows Asset Category</inlineHelpText>
+        <label>Asset Category</label>
+        <length>40</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Asset_Type__c</fullName>
+        <description>This field is to store the value of &apos;Asset Type&apos; of the VF page Asset Type</description>
+        <externalId>false</externalId>
+        <inlineHelpText>It shows Asset Type</inlineHelpText>
+        <label>Asset Type</label>
+        <length>40</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Description__c</fullName>
+        <description>This field is to Store Description from Asset Request Page</description>
+        <externalId>false</externalId>
+        <inlineHelpText>It Shows Asset Description</inlineHelpText>
+        <label>Description</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Quantity__c</fullName>
+        <description>This field is to store Quantity submitted by Asset Request page</description>
+        <externalId>false</externalId>
+        <inlineHelpText>It Shows Quantity</inlineHelpText>
+        <label>Quantity</label>
+        <precision>10</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Request_Date__c</fullName>
+        <description>This field is to store Date for Asset Request</description>
+        <externalId>false</externalId>
+        <inlineHelpText>It Shows Request Date</inlineHelpText>
+        <label>Request Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Request_Name__c</fullName>
+        <description>This field is to Store of the Subject of request</description>
+        <externalId>false</externalId>
+        <inlineHelpText>It Shows Asset Request Name</inlineHelpText>
+        <label>Request Name</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Request_Status__c</fullName>
+        <description>This field is to store request status</description>
+        <externalId>false</externalId>
+        <inlineHelpText>It Shows Asset Request Status</inlineHelpText>
+        <label>Request Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Pending</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>In Review</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Implemented</fullName>
+                <default>false</default>
+            </picklistValues>
+            <restrictedPicklist>true</restrictedPicklist>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Request_Type__c</fullName>
+        <description>This picklist is to store &apos;Type of Request&apos; field from Asset Request VF Page</description>
+        <externalId>false</externalId>
+        <inlineHelpText>It Shows Request Type</inlineHelpText>
+        <label>Request Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Purchase</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Allocation</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Service/Repair</fullName>
+                <default>false</default>
+            </picklistValues>
+            <restrictedPicklist>true</restrictedPicklist>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <label>Asset Requested</label>
+    <listViews>
+        <fullName>All</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <displayFormat>AR-{0000}</displayFormat>
+        <label>Asset Requested Name</label>
+        <trackHistory>false</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Asset Requested</pluralLabel>
+    <searchLayouts>
+        <customTabListAdditionalFields>Request_Name__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Request_Type__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Asset_Category__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Asset_Type__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Request_Date__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Quantity__c</customTabListAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+</CustomObject>

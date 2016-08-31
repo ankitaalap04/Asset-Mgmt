@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QuickAction xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Creates allocation for the asset</description>
+    <height>800</height>
+    <icon>Assign_Icon</icon>
+    <label>Assign</label>
+    <page>CAM_AssetAssignmentPage</page>
+    <type>VisualforcePage</type>
+    <width>-100</width>
+</QuickAction>

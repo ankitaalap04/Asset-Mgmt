@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QuickAction xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>This action creates a case for an asset</description>
+    <height>450</height>
+    <icon>Report_A_Problem_Icon</icon>
+    <label>Report a problem</label>
+    <page>CAM_CasePage</page>
+    <type>VisualforcePage</type>
+    <width>-100</width>
+</QuickAction>

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>AM_Asset__c</fullName>
+        <description>It is Lookup field connected with Asset Object</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Select Asset</inlineHelpText>
+        <label>Asset</label>
+        <referenceTo>AM_Asset__c</referenceTo>
+        <relationshipLabel>Asset Allocations</relationshipLabel>
+        <relationshipName>Asset_Allocations</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>AM_Contact__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <description>This field is to store contact for allocation</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Select Contact to whom you want to allocate Asset</inlineHelpText>
+        <label>Contact</label>
+        <referenceTo>Contact</referenceTo>
+        <relationshipLabel>Asset Allocations</relationshipLabel>
+        <relationshipName>Asset_Allocations</relationshipName>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>AM_End_Date__c</fullName>
+        <description>This Date is for Ending of Allocate</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Select Date when u want to End Allocation</inlineHelpText>
+        <label>End Date</label>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>AM_Start_Date__c</fullName>
+        <defaultValue>NOW()</defaultValue>
+        <description>This Date is for Starting of Allocate</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Select Date when u want to Start Allocation</inlineHelpText>
+        <label>Start Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <label>Asset Allocation</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>AM_Asset__c</columns>
+        <columns>AM_Start_Date__c</columns>
+        <columns>AM_End_Date__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <listViews>
+        <fullName>All_Asset_Allocation</fullName>
+        <columns>NAME</columns>
+        <columns>AM_Asset__c</columns>
+        <columns>AM_Contact__c</columns>
+        <columns>AM_Start_Date__c</columns>
+        <columns>AM_End_Date__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All Asset Allocation</label>
+    </listViews>
+    <nameField>
+        <displayFormat>AL-{00000000}</displayFormat>
+        <label>Asset Alocation</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Asset Allocate</pluralLabel>
+    <searchLayouts>
+        <customTabListAdditionalFields>AM_Asset__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>AM_Contact__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>AM_Start_Date__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>AM_End_Date__c</customTabListAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ControlledByParent</sharingModel>
+    <validationRules>
+        <fullName>Asset_Date_Range_Validation</fullName>
+        <active>true</active>
+        <description>End date must be &gt; Start Date</description>
+        <errorConditionFormula>AM_Start_Date__c &gt;= AM_End_Date__c</errorConditionFormula>
+        <errorDisplayField>AM_End_Date__c</errorDisplayField>
+        <errorMessage>Requested End Date must be later than requested Start Date</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Asset_Out_Of_Service</fullName>
+        <active>true</active>
+        <description>This Validation checks that Asset is out of service or not, if it is then it will show an error and wont be allow to allocate it.</description>
+        <errorConditionFormula>AM_Asset__r.AM_Out_of_Service__c  = True</errorConditionFormula>
+        <errorDisplayField>AM_Asset__c</errorDisplayField>
+        <errorMessage>Asset Out Of Service, Not Possible Allocation</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Start_Date_should_be_Now</fullName>
+        <active>true</active>
+        <description>This validation rule prevents the user from entering a future date for begin date.</description>
+        <errorConditionFormula>AND(ISCHANGED(AM_Start_Date__c),OR(AM_Start_Date__c  &gt;  NOW(), AM_Start_Date__c &lt; NOW()))</errorConditionFormula>
+        <errorDisplayField>AM_Start_Date__c</errorDisplayField>
+        <errorMessage>Start Date cannot be in the past or future.</errorMessage>
+    </validationRules>
+</CustomObject>

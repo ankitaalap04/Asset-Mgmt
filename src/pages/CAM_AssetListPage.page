@@ -1,0 +1,68 @@
+<apex:page controller="CAM_AssetListController" showHeader="false" sidebar="false" standardStylesheets="false" applyBodyTag="false">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <apex:stylesheet value="{!URLFOR($Resource.Asset_Manager_Resources, 'CSS/style.css')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.Asset_Manager_Resources, 'JS/jquery.min.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.Asset_Manager_Resources, 'JS/d3.v3.min.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.Asset_Manager_Resources, 'JS/donuts.js')}"/>
+    <script>
+        $(function(){
+            $( "select" ).change(function() {
+              searchJS();
+          });
+        });
+
+        function noenter(ev)  {
+            if (window.event && window.event.keyCode == 13 || ev.which == 13) {
+                searchJS();
+                return false;
+             } else {
+                  return true;
+             }
+         }
+    </script>
+    <header>           
+        <h1>{!$Label.AM_Organization_Name}</h1>
+        <h2>{!assetLabel} List</h2>
+    </header>
+    <!-- Error Message Display-->
+    <apex:repeat value="{!errorMessages}" var="msg" rows="1">
+        <apex:pageMessage summary="{!msg.Summary}" severity="Error"/>
+    </apex:repeat> 
+    <div id="assetBox" layout="block">
+        <apex:form >
+            <div id="inputbox">
+                <apex:pageBlock >
+              <!--       <apex:selectList value="{!assetStatus}" multiselect="false" size="1">
+                        <apex:actionSupport event="onchange" action="{!executeAssetQuery}"/>
+                        <apex:selectOptions value="{!assetOptions}"/>
+                    </apex:selectList>                  --> 
+                    <apex:dynamicComponent componentValue="{!FilterSection}"/>
+                    <apex:inputText value="{!searchTerm}" onkeypress="return noenter(event);" rendered="{!showSearch}" html-placeholder="search"/>
+                    <apex:commandButton action="{!executeAssetQuery}" value="Search" id="button" reRender="listblock"/>
+                    <apex:commandButton value="Back" action="{!backMethod}"/>
+                    <apex:actionFunction action="{!executeAssetQuery}" name="searchJS" reRender="listblock"/>
+                </apex:pageBlock>
+            </div>
+            <div id="resultBox">
+                <apex:pageBlock id="listblock">
+                    <apex:pageBlockTable value="{!AssetRecords}" var="a">
+                          <apex:column headerValue="Name">
+                          <apex:outputLink value="/{!a.Id}">{!a.Item_Name__c}</apex:outputLink>
+                        </apex:column>
+                       <apex:column headerValue="Location">
+                          <apex:outputLink value="/{!a.AM_Location__c}">{!a.AM_Location__r.Name}</apex:outputLink>
+                       </apex:column>  
+                       <apex:column headerValue="Status">
+                          <apex:outputText value="{!a.AM_Status__c}"/>
+                       </apex:column>                        
+                       <apex:column headerValue="Type">
+                          <apex:outputText value="{!a.AM_Type__c}"/>
+                       </apex:column> 
+                    </apex:pageBlockTable>
+                    <apex:commandLink styleClass="previous" action="{!ssc.Previous}" value="< Previous Page" rendered="{!ssc.HasPrevious}"/>
+                    <apex:commandLink styleClass="next" action="{!ssc.Next}" value="Next Page >" rendered="{!ssc.HasNext}"/>
+                </apex:pageBlock>
+            </div>
+        </apex:form>
+    </div>
+</apex:page>

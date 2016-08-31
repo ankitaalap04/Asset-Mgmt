@@ -1,0 +1,68 @@
+<apex:page Controller="CAM_ContactListController" showHeader="false" sidebar="false" standardStylesheets="false">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<apex:stylesheet value="{!URLFOR($Resource.Asset_Manager_Resources, 'CSS/style.css')}"/>
+<apex:includeScript value="{!URLFOR($Resource.Asset_Manager_Resources, 'JS/jquery.min.js')}"/>
+
+    <script type='text/javascript'>
+        function noenter(ev)  {
+            if (window.event && window.event.keyCode == 13 || ev.which == 13) {
+                searchJS();
+                return false;
+             } else {
+                  return true;
+             }
+         }
+    </script>
+    <header>
+        <h1>{!$Label.AM_Organization_Name}</h1>
+        <h2>User Search</h2>
+    </header>
+    <!-- Error Message Display-->
+    <apex:repeat value="{!errorMessages}" var="msg" rows="1">
+        <apex:pageMessage summary="{!msg.Summary}" severity="Error"/>
+    </apex:repeat>
+
+    <apex:form id="search_form">
+        <div id="searchBox">
+            <span class="page-search"><span class="icon_search"></span>
+                <span>
+                    <apex:inputText value="{!searchTerm}" onkeypress="return noenter(event);" html-placeholder="Search"/>
+                    <apex:commandButton value="Search" action="{!executeQuery}"/>
+               <!--    <apex:actionFunction name="searchJS" action="{!executeQuery}" rerender="con_form,search_form" status="searchStatus"/> -->
+                    
+                    <apex:commandButton value="Back" action="{!backMethod}"/>
+                </span>
+            </span>
+            <apex:variable var="contactResults" value="0">
+                <span class="results">Results: {!ssc.ResultSize} </span>
+            </apex:variable>
+        </div>
+    </apex:form>
+
+    <!-- Contacts -->
+   <apex:form id="con_form">
+        <apex:pageBlock >
+            <div id="contactBox">
+                <apex:repeat var="contact" value="{!contactRecords}">
+                    <div style="cursor:pointer" class="contactRepeat" onclick="
+                            if( (typeof sforce != 'undefined') && (sforce != null) ) {
+                                sforce.one.navigateToSObject('{!contact.Id}');
+                            }
+                            else {
+                                window.location.href = 
+                                    '{!URLFOR($Action.Contact.View, contact.Id)}';
+                            }"
+                        >
+                        <div class="userName">{!contact.Name}</div>
+                        <div class="email">{!contact.Email}</div>
+                        <span class="rightArrow oneIcon">&#xe006;</span>
+                    </div>
+                </apex:repeat>
+            </div>
+            <div class="nav-container">
+                <apex:commandLink styleClass="previous" action="{!ssc.Previous}" value="< Previous Page" rendered="{!ssc.HasPrevious}"/>
+                <apex:commandLink styleClass="next" action="{!ssc.Next}" value="Next Page >" rendered="{!ssc.HasNext}"/>
+            </div>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

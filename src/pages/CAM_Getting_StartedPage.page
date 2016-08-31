@@ -1,0 +1,9 @@
+<apex:page >
+ 
+ <div style='width:100%'>
+ <p align = 'center'>
+ <apex:image url="{!$Resource.Agile_Asset_Lifecycle_LOGO}" width="800" height="500" />
+ </p>
+ </div>
+                  
+</apex:page>

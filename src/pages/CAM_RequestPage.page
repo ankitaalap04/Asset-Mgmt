@@ -1,0 +1,186 @@
+<apex:page id="Request_Page" showHeader="true" controller="CAM_Request_Page">
+  <!-- Begin Default Content REMOVE THIS -->
+ <html>
+ <head><style>
+input[type=text]
+{
+    height:22px;   
+    width:218px;
+    font-family:lucida sans unicode;
+    padding-left:4%;
+}
+.output
+{
+    widht:50px;
+    height:20px;   
+    font-family:lucida sans unicode;
+    padding-left:4%;
+}
+.text_css
+{
+    box-shadow:0px 0px  4px gray;
+    border-radius:3px;
+    height:10px;
+}
+
+select
+{
+    /* box-shadow:0px 0px  4px gray;*/
+     width:97%;
+     height:25px;
+     font-family:lucida sans unicode;
+   // padding:2% 0% 0% 4%;
+    color:gray;
+}
+
+:valid {
+    color: black;
+}
+
+
+.submit_button
+{
+background-color:#1E89BA;
+border-radius:1px;
+width:65%;
+color:white; 
+ box-shadow:0px 0px  4px gray; 
+
+font-size:13pt;
+font-family:lucida sans unicode;
+padding:0% 0% 2% 0%;
+}
+.submit_button:hover
+{
+    background-color:#FF9900;
+}
+
+.red
+{
+color:red;
+}
+
+.note
+{
+    color:gray;
+    
+    padding:1% 6% 1% 6%;
+    border-top-left-radius:7px;
+    border-bottom-right-radius:7px;
+}
+
+.first_div
+{
+height:100%;
+width:55%;
+float:left;
+text-align:left;
+font-family:verdana;
+font-size:13px;
+background-color:none;
+padding:3% 0% 3% 0%;
+margin:-2% 0% 0% 0%;
+}
+
+.first_div p
+{
+    text-align:left;
+}
+
+.text_content_div
+{
+    
+    height:100%;
+    width:50%;
+    float:left;
+    background-color:none;
+    //padding:0% 0% 0% 0%;
+   // margin:9% 0% 0% 0%;
+   // text-align:justify;
+    
+}
+
+.text_content_div span
+{
+    color:gray;
+    font-family:lucida sans unicode;
+    font-size:10pt;
+}
+
+.form_div
+{
+    color:white;
+    height:100%;
+    width:50%;
+    float:left;
+    text-align:right;
+    font-family:lucida sans unicode;
+    font-size:15px;
+   /* background-image:url('http://www.confidentgovernance.com/images/Article_2014/product/contactus background.jpg');*/
+    background-repeat:no-repeat;
+}
+
+</style>
+</head>
+<apex:define name="body">  
+      <center>
+<apex:form id="theForm" forceSSL="true">
+ 
+<div class="product_main_div" style="border:none;box-shadow:none;align:center">
+<div class="form_div">
+<apex:sectionHeader title="CG Asset Request" />text-align:left;
+
+
+                    <apex:pageMessages id="error"/>
+                    
+                    <apex:panelGrid columns="2" bgcolor="white" style="margin-top:1em;">
+                      <apex:outputLabel value="Subject of Request :" for="RequestName"/>
+                      <apex:inputText required="true" id="RequestName" value="{!RequestName}" label="Request Name"/>
+                       <apex:outputLabel value="Description :" for="description"/>
+                      <apex:inputTextArea id="description" value="{!description}" label="Description" style="width: 225px; height:70px;"/>
+                      <apex:outputText styleClass="output">Type of Request: </apex:outputText>
+                       <apex:selectList value="{!btype}" size="1">
+                       <apex:selectOptions value="{!Types}"></apex:selectOptions></apex:selectList>
+                       <apex:outputText >Asset Category: </apex:outputText> 
+                       <apex:selectList required="true" value="{!stage}" size="1">
+                       <apex:selectOptions value="{!Stages}"></apex:selectOptions></apex:selectList>
+                      
+                       <apex:outputText >Asset Type: </apex:outputText>
+                       <apex:selectList required="true" value="{!stagedata}" size="1">
+                       <apex:selectOptions value="{!Stagesdata}"></apex:selectOptions></apex:selectList>
+                        
+                      <apex:outputLabel value="Quantity:" for="Quantity"/>
+                      <apex:inputText required="false" id="Quantity" value="{!quantity}" label="Quantity"/>
+                        
+                         
+                        Request Attachement :<apex:inputfile id="AttachedFile" value="{!AttachedFile.body}" filename="{!AttachedFile.Name}" ></apex:inputfile><br/>
+                          
+                                                 
+                      <!--   <apex:outputLabel value="Probability:" for="probability"/>
+                      <apex:inputText id="probability" value="{!probability}" label="P robability"/>
+                        <apex:outputLabel value="Amount:" for="amount"/>
+                      <apex:inputText id="amount" value="{!amount}" label="Amount"/>-->            
+                    <!-- <apex:outputText >Data Access: </apex:outputText>
+                          <apex:selectList value="{!leadSource}" multiselect="true" size="5" style="height: 80px;">
+                         <apex:selectOptions value="{!LeadSources}"></apex:selectOptions></apex:selectList> -->
+                       <!--<apex:outputLabel value="NextStep :" for="nextStep "/>
+                      <apex:inputText id="nextStep" value="{!nextStep}" label="Next Step"/>-->
+               <!--  <apex:outputText >Data Senstive: </apex:outputText> 
+                           <apex:selectRadio value="{!itemValue}"><apex:selectOptions value="{!Items}"/></apex:selectRadio>-->
+                <!-- <apex:selectCheckboxes > <apex:selectOptions value="{!Items}"/></apex:selectCheckboxes> value="{!itemsValue}"-->
+                           <apex:outputText value=""/>
+                   
+                      <div align="center" draggable="False"/>
+                      <apex:commandButton action="{!requestform}" value="{!$Label.site.submit}" id="submit"/>
+                    </apex:panelGrid>
+                  <br/>
+                   </div></div>
+                 
+</apex:form>
+     </center>
+      <br/>
+    </apex:define>
+  <!-- End Default Content REMOVE THIS -->
+  </html>
+  
+</apex:page>

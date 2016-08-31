@@ -1,0 +1,26 @@
+<apex:page controller="License_Key" >
+    <apex:form ><!--rendered="{!AND($Setup.page_access__c.License_Key__c!='')}"-->
+     <apex:pageBlock title="Please Subscribe this page to access.">
+         <apex:outputPanel >
+             Enter your License Key or, Please Contact to ConfidentG with requirement to obtain new license.
+         </apex:outputPanel><apex:pageBlockSection ><br/></apex:pageBlockSection>
+         <apex:pageBlockSection columns="2">
+             <apex:pageBlockSectionItem >
+         <apex:outputText >Enter License Key :</apex:outputText>
+         <apex:inputText value="{!Licensekey}" id="Licensekey"/>
+             </apex:pageBlockSectionItem>
+             <apex:pageBlockSection ></apex:pageBlockSection>
+             <apex:pageBlockSectionItem >&nbsp;&nbsp;&nbsp;
+          <!--   <apex:commandButton value="Activate" action="{!matchLicenseKeys}"/>-->
+              <apex:commandButton value="Click To Activate" action="{!matchLicenseKeys}"/>   
+             <!--apex:commandButton value=" Subscribe Now "/-->
+             </apex:pageBlockSectionItem>
+         </apex:pageBlockSection>
+     </apex:pageBlock>
+     </apex:form>
+   <!--  <apex:form rendered="{!$Setup.page_access__c.License_Key__c=='mindi'}">
+     <apex:pageBlock >
+     This is a second page after key inserted.
+     </apex:pageBlock>
+     </apex:form>-->
+</apex:page>

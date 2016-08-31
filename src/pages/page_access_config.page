@@ -1,0 +1,131 @@
+<apex:page controller="SecureSettingsController">
+   <apex:form id="mainForm">   
+  <apex:actionFunction action="{!getTabName}" name="formodlist"/>
+   <apex:actionFunction action="{!LicenseType}" name="selectLicType"/>
+   
+        <apex:sectionHeader title="Secure Settings" />
+        <apex:panelGrid columns="1">
+            <apex:outputText >
+                Custom Setting for page access. Please do not update without permission of App Vendor.
+            </apex:outputText>
+            <apex:outputText > </apex:outputText>
+        </apex:panelGrid>
+        <apex:pageMessages />
+   <!--     <apex:pageBlock title="License Keys" mode="edit">-->
+<!--apex:pageBlockButtons ><apex:commandButton value="Generate Key" action="{!GenerateLicenseKeys}" /-->
+<!--apex:commandButton value="Get Objects" action="{!getobjNames}" /-->
+        <!--apex:commandButton value="Save"/-->
+        <!--apex:commandButton value="Save" action="{!saveLicenseKeys}" /-->
+ <!--  <apex:pageBlockSection columns="2"> 
+        <apex:pageBlockSectionItem >
+        <apex:outputText >Licenses Types: </apex:outputText>
+        <apex:selectList value="{!select_LicType}" size="1" onchange="select_license()">
+        <!--apex:actionSupport event="onchange" action="{!onUserChange}"/-->
+    <!--    <apex:selectOptions value="{!Licenses}"></apex:selectOptions>
+        </apex:selectList>
+        </apex:pageBlockSectionItem>
+        </apex:pageBlockSection>
+        </apex:pageBlock> 
+        <!---------------------------------Nikunj Start code----------------------------------->
+      <apex:pageBlock title="Enterprise License" mode="edit" ><!--rendered="{!if(select_LicType =='IL',False,True)}"-->
+        <apex:pageBlockButtons style="align:center;">
+            <apex:commandButton value="Generate Key" action="{!GenerateLicenseKeys}" />
+         <!-- <apex:commandButton value="Test" action="{!test}" /> -->
+             </apex:pageBlockButtons>
+           <apex:pageBlockSection columns="2" title="Modules">
+           <apex:outputPanel >
+           <apex:outputlabel value="Select App"/> &nbsp;&nbsp;
+           <apex:selectList value="{!select_module}" onchange="modlist();" size="1">
+           <!-- <apex:selectList value="{!select_module}" size="1"> -->
+              <apex:selectoptions value="{!TabName1}"></apex:selectoptions>
+            </apex:selectList>
+               </apex:outputPanel>
+               <apex:outputPanel >
+            <apex:outputLabel value=" Perpetual: "/>
+                <apex:inputCheckbox id="cbox" value="{!Perpetual}" onclick="Alter_f(this)" required="true"/>                  
+                </apex:outputPanel><apex:outputPanel >
+               <div id="perpetual">  <apex:outputLabel for="inputDate" value=" Expire Date: "/>
+               <apex:inputField value="{!DateInput.ActivityDate}" /> </div> </apex:outputPanel> 
+         
+               <apex:outputPanel >    <apex:outputLabel value=" No.of Seats: "/>
+                 <apex:inputText value="{!No_Of_Seats}" />
+            </apex:outputPanel> </apex:pageBlockSection>
+            <apex:pageBlockSection >
+           <apex:outputPanel >
+             <apex:pageBlockTable style="width:1065px" title="Tabs" value="{!LT}" var="l" id="table">
+                <apex:column width="50" >
+                <apex:facet name="header" >Select</apex:facet>
+                   <apex:inputCheckbox value="{!l.check}" disabled="True"/>
+                </apex:column>
+                <apex:column >
+                <apex:facet name="header">Tabs</apex:facet>
+                   <apex:outputPanel >{!l.tab}</apex:outputPanel>
+                </apex:column>
+                <apex:column >
+                <apex:facet name="header">Accociated Objects</apex:facet>
+                   <apex:inputCheckbox value="{!l.check}" disabled="True" rendered="{!l.Associated_Object != null}"/>
+                   <apex:outputPanel >{!l.Associated_Object}</apex:outputPanel>
+                </apex:column>
+             </apex:pageBlockTable>
+            </apex:outputPanel>
+            </apex:pageBlockSection>  
+             
+       <!---------------------------------Nikunj End------------------------------->
+        <apex:pageBlockSection >
+    <!--        <apex:outputPanel>
+            <apex:pageBlockTable style="width:1065px" title="Tabs3" value="{!NS}" var="n" id="table1">
+                <apex:column width="50" >
+                <apex:facet name="header" >Select</apex:facet>
+                   <apex:inputCheckbox value="{!n.selected}" />
+                </apex:column>
+                <apex:column >
+                <apex:facet name="header">Name</apex:facet>
+                   <apex:outputPanel >{!n.name}</apex:outputPanel>
+                </apex:column>
+             </apex:pageBlockTable>
+            </apex:outputPanel> -->
+       <!--  <apex:outputlabel value="All Modules"/> &nbsp;&nbsp;
+        <apex:selectList size="1">
+              <apex:selectoptions value="{!TabName1}"></apex:selectoptions>
+        </apex:selectList>
+       
+        <apex:outputlabel value="All Objects"/> &nbsp;&nbsp;
+        <apex:selectList size="1">
+              <apex:selectoptions value="{!objnames}"></apex:selectoptions>
+        </apex:selectList> -->
+       </apex:pageBlockSection>
+        <apex:pageBlockSection columns="2">
+      
+        </apex:pageBlockSection>
+        </apex:pageBlock>
+              
+       <!----------------------------Nikunj Start--------------------------------->
+     <apex:page >              <script>
+         function modlist()
+         {
+             formodlist();
+         }
+         function select_license()
+         {
+             selectLicType();
+         }
+          function Alter_f(val)
+       {
+    <!--       alert('You have selected  '+ val); -->
+           if(val.checked)
+           {           
+           document.getElementById('perpetual').style.display = 'none';
+           <!--  document.getElementById('perpetual').value ='';-->
+           <!-- document.getElementById('perpetual').disabled = false;-->
+<!--               alert(val.checked); -->
+           }
+           else
+           {
+           document.getElementById('perpetual').style.display = '';   
+    <!--           alert(val.checked); -->
+           }
+       }
+         </script></apex:page> 
+      <!-------------------------------Nikunj End code------------------------->
+         </apex:form>
+</apex:page>

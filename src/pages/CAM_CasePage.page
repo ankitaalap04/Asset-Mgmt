@@ -1,0 +1,158 @@
+<apex:page standardController="AM_Asset__c" extensions="CAM_CaseController" showHeader="false" sidebar="false" standardStylesheets="false">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <apex:stylesheet value="{!URLFOR($Resource.Asset_Manager_Resources, 'CSS/style.css')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.Asset_Manager_Resources, 'JS/jquery.min.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.Asset_Manager_Resources, 'JS/d3.v3.min.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.Asset_Manager_Resources, 'JS/donuts.js')}"/>
+    <script type='text/javascript' src='/canvas/sdk/js/publisher.js'></script>
+    <script>
+        $(function(){
+            //Disable hover lookup
+            //$('#resultBox table td a').removeAttr('onblur').removeAttr('onfocus').removeAttr('onmouseover').removeAttr('onmouseout');
+
+            //Show the lookup button if launched from Home Page
+            if({!showLookUp})
+            {
+                $('#btnLookUp').attr('style', 'display:inline');
+            }
+            //Hide the lookup if launched from Asset details
+            else
+            {
+                $('#btnLookUp').attr('style', 'display:none');
+
+                //Hide Other details field as well
+                $('.hideInSmallScreen').css('display', 'none');
+            }
+
+            if( (typeof sforce != 'undefined') && (sforce != null) && !{!showLookup} ) {
+                // Salesforce1
+                 $('[id*=btnSubmit]').attr('style', 'display:none');
+              } else {
+                // Desktop
+                $('[id*=btnSubmit]').attr('style', 'display:block');
+            }            
+        });
+
+        function openAssetLookupPopup()
+        {   
+            $('#assetLookup').show();
+        }
+
+        function fillInAsset(name, id, status, price, location, type)
+        {
+            $('[id*=selAssetId]').val(id);
+            $('[id*=selAssetName]').val(name);
+            $('[id*=selAssetPrice]').text(price);
+            $('[id*=selAssetLocation]').text(location);
+            $('[id*=selAssetType]').text(type);
+            $('#assetLookup').hide();
+
+        }        
+                      
+        function hideLookUp(objectType)
+        {
+
+            $('#assetLookup').hide();
+
+        }
+
+        //publisher action related script
+        Sfdc.canvas.publisher.subscribe(
+            {
+                name: "publisher.showPanel", 
+                onData:function(e)
+                {
+                    Sfdc.canvas.publisher.publish({name:"publisher.setValidForSubmit", payload:"true"});
+                }
+            }
+        );
+
+        Sfdc.canvas.publisher.subscribe(
+            {
+                name: "publisher.post",
+                onData: function(e)
+                {
+                    createCase();
+                }
+            }
+        );
+
+        function closePopUp()
+        { 
+
+            closeConfirmation();
+
+            if( (typeof sforce != 'undefined') && (sforce != null)) {
+                // Salesforce1
+                Sfdc.canvas.publisher.publish(
+                { 
+                    name: "publisher.close",
+                    payload:{ refresh:"true" }
+                });
+            } 
+        }        
+
+    </script>
+    
+    <div id="assetLookup"> <!-- Asset Lookup-->
+        <div class="lookup-contianer">
+        <c:AM_LookupComponent p_objType="AM_Asset__c" p_assetstatus="" p_recType="{!assetRecordType}"/>
+            </div>
+    </div>
+
+    <header>
+        <h1 class="hideInSmallScreen">{!$Label.AM_Organization_Name}</h1>
+        <h2>Report a Problem</h2>
+    </header>
+    <!-- Error Message Display-->
+    <apex:repeat value="{!errorMessages}" var="msg" rows="1">
+        <apex:pageMessage summary="{!msg.Summary}" severity="Error"/>
+    </apex:repeat> 
+    <apex:form >
+    <div id="content">
+        <div id="create-case">
+            <div class="content-block">
+                <div class="input-set">
+                    <apex:inputHidden value="{!aCase.AM_Asset__c}" id="selAssetId" />
+                    <apex:outputText styleClass="caseLabel" value="{!assetLabel}" />
+                    <apex:inputText styleClass="lookup assetlookup" size="40" id="selAssetName" onFocus="this.blur()" disabled="false" value="{!assetName}"/>
+                    <button id="btnLookUp" onclick="openAssetLookupPopup(); return false"><span class="oneIcon">&#xe01b;</span></button> 
+                </div>
+                <div class="input-set">
+                    <apex:outputText styleClass="caseLabel" value="Subject" />
+                   <apex:inputField value="{!aCase.Subject__c}" />           
+                </div>
+                <div class="input-set">
+                    <apex:outputText styleClass="caseLabel" value="Description" />
+                    <apex:inputField value="{!aCase.Description__c}" /> 
+                </div>
+            </div>
+            <div class="content-block">
+                <div class="input-set">
+                    <apex:outputText value="Mark {!assetLabel} as out of service?" /> 
+                    <apex:inputField value="{!aCase.Mark_Asset_as_out_of_service__c}" />
+                </div> 
+            <!--    <div class="input-set">
+                         <apex:outputText styleClass="caseLabel" value="File Name"/>
+                         <apex:inputFile value="{!attach.Body}" filename="{!attach.Name}" accept="image/*;capture=camera"/>               </div> -->                            
+                </div> 
+            <apex:actionFunction name="createCase" action="{!createCase}"/>
+            <br style="clear:both" />
+            <apex:commandButton id="btnSubmit" action="{!createCase}" value="Create Ticket"/>
+<apex:commandButton value="Back" action="{!backMethod}"/>
+        </div>
+    </div>
+    <apex:pageBlock rendered="{!showConfirmation}" id="confirmPopUp">
+        <div class="confirmation-container">
+            <div class='confirmation-window'>
+                <div>
+                    <apex:outputText value="Case created successfully!"/>
+                </div>
+                <apex:commandButton onclick="closePopUp();" styleClass="confirmation-button" reRender="confirmPopUp" value="Close"/>
+            </div>
+            <div class="confirmation-shade"></div>
+            <apex:actionFunction action="{!closeConfirmation}" name="closeConfirmation"/>
+        </div>
+    </apex:pageBlock>    
+    </apex:form>
+</apex:page>

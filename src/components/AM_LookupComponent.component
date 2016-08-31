@@ -1,0 +1,127 @@
+<apex:component controller="CAM_LookUpComponentController">
+    
+  <script>
+	function keypressInBox(e) {
+    var code = (e.keyCode ? e.keyCode : e.which);
+    if (code == 13) { //Enter keycode                        
+         e.preventDefault();		
+         $("form").submit();
+        alert('Click GO');
+    }
+};
+
+</script>
+  
+  <apex:attribute name="p_objType" description="Object Type for controller" assignTo="{!lookupObjectName}" type="String" required="true"/>
+  <apex:attribute name="p_assetstatus" description="Asset status" assignTo="{!assetStatus}" type="String" required="false"/>
+  <apex:attribute name="p_recType" description="Asset record type (required for Assets)" assignTo="{!assetRecordType}" type="String" required="false"/>
+  <div class="lookup-container">
+    <apex:form id="form" >  
+       <div style="width 100%">
+          <apex:pageBlock title="Lookup" id="block">
+                <div class="input-set">
+                  <label>Search</label>
+                    <apex:inputText value="{!lookupQuery}"  id="query" html-placeholder="search" /> 
+             
+                  <apex:commandButton value="Go" action="{!runQuery}"  />
+                  
+                </div>
+          </apex:pageBlock>
+           
+           <div id="resultBox">
+           
+           <apex:pageBlock rendered="{!defaultdata}" >
+           	
+            <apex:dataTable value="{!Assets}" var="asset" id="theTable" rowClasses="odd,even" columnsWidth="120px"
+
+                        styleClass="tableClass">
+
+	<!--	<apex:facet name="caption">table caption</apex:facet> -->
+			<apex:facet name="header">List Of Assets</apex:facet>
+	<!--	<apex:facet name="footer">table footer</apex:facet> -->
+		<!--	<apex:column >
+		        <apex:facet name="header">Number</apex:facet>
+		<!--	<apex:facet name="footer">column footer</apex:facet> -->
+		<!--	<apex:outputText value="{!asset.Name}"/>
+			</apex:column> -->
+     
+			<apex:column >
+			<apex:facet name="header">Name</apex:facet>
+		<!--	<apex:facet name="footer">column footer</apex:facet> -->
+			<apex:outputText value="{!asset.Item_Name__c}"/>
+			</apex:column>        
+      	   <apex:column >
+			<apex:facet name="header">Status</apex:facet>
+		<!--	<apex:facet name="footer">column footer</apex:facet> -->
+	 		<apex:outputText value="{!asset.AM_Status__c}"/>
+			</apex:column>
+			</apex:dataTable>
+           
+            
+               	<div id="contactBox">
+                <apex:repeat var="contact" value="{!contactRecord}">
+                    <div style="cursor:pointer" class="contactRepeat" onclick="
+                            if( (typeof sforce != 'undefined') && (sforce != null) ) {
+                                sforce.one.navigateToSObject('{!contact.Id}');
+                            }
+                            else {
+                                window.location.href = 
+                                    '{!URLFOR($Action.Contact.View, contact.Id)}';
+                            }"
+                        >
+                        <div class="userName">{!contact.Name}</div>
+                        <div class="email">{!contact.Email}</div>
+                        <span class="rightArrow oneIcon">&#xe006;</span>
+                    </div>
+                </apex:repeat>
+            </div>
+            <div class="nav-container">
+                <apex:commandLink styleClass="previous" action="{!ssc.Previous}" value="< Previous Page" rendered="{!ssc.HasPrevious}"/>
+                <apex:commandLink styleClass="next" action="{!ssc.Next}" value="Next Page >" rendered="{!ssc.HasNext}"/>
+            </div>   
+            
+           </apex:pageBlock>   
+           
+          </div>
+          <div id="resultBox">
+              <apex:pageBlock id="resultBlock" rendered="{!showAsset}"> <!-- Asset Result Table-->
+               <table>
+                    <tr>
+                        <th>Name</th>
+                        <th>Location</th>
+                        <th>Status</th>
+                        <th>Type</th>
+                        <th>AOOS</th>
+                    </tr>
+
+                    <apex:repeat var="asset" value="{!assetLookupValues}">
+                    <tr>
+                        <td>
+                          <apex:outputLink value="#" onclick="fillInAsset('{!JSINHTMLENCODE(asset.Name)}', '{!JSINHTMLENCODE(asset.id)}', '{!JSINHTMLENCODE(asset.AM_Status__c)}', '{!asset.AM_Price__c}', '{!JSINHTMLENCODE(asset.AM_Location__r.Name)}', '{!JSINHTMLENCODE(asset.AM_Type__c)}')">{!asset.Item_Name__c}</apex:outputLink>
+                        </td>
+                        <td>{!asset.AM_Location__r.Name}</td>
+                        <td>{!asset.AM_Status__c}</td>
+                        <td>{!asset.AM_Type__c}</td>
+                        <td>{!asset.AM_Out_of_Service__c}</td>
+                    </tr>
+                    </apex:repeat> 
+                </table>                               
+              </apex:pageBlock>
+              
+             
+            <apex:pageBlock rendered="{!showContact}"> <!-- Contact Result Table-->
+              <apex:pageBlockTable value="{!contactLookupValues}" var="contact">
+                <apex:column headerValue="Name">
+                  <apex:outputLink value="#" onclick="fillInContact('{!JSINHTMLENCODE(contact.Name)}', '{!JSINHTMLENCODE(contact.id)}', '{!JSINHTMLENCODE(contact.Email)}', '{!JSINHTMLENCODE(contact.Phone)}')">{!contact.Name}</apex:outputLink>       
+                </apex:column>
+                <apex:column headerValue="Email" value="{!contact.Email}"/>
+                <apex:column headerValue="Phone" value="{!contact.Phone}"/>
+              </apex:pageBlockTable>  
+            </apex:pageBlock>
+            <button id="lookup-close" type="button" onclick="hideLookUp('{!p_objType}');">Close</button>         
+          </div>
+       </div>
+     </apex:form>
+   </div>
+    
+</apex:component>

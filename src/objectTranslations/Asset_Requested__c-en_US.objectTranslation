@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Asset Requested</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Asset Requested</value>
+    </caseValues>
+    <fields>
+        <help><!-- It Shows Asset Category --></help>
+        <label><!-- Asset Category --></label>
+        <name>Asset_Category__c</name>
+    </fields>
+    <fields>
+        <help><!-- It shows Asset Type --></help>
+        <label><!-- Asset Type --></label>
+        <name>Asset_Type__c</name>
+    </fields>
+    <fields>
+        <help><!-- It Shows Asset Description --></help>
+        <label><!-- Description --></label>
+        <name>Description__c</name>
+    </fields>
+    <fields>
+        <help><!-- It Shows Quantity --></help>
+        <label><!-- Quantity --></label>
+        <name>Quantity__c</name>
+    </fields>
+    <fields>
+        <help><!-- It Shows Request Date --></help>
+        <label><!-- Request Date --></label>
+        <name>Request_Date__c</name>
+    </fields>
+    <fields>
+        <help><!-- It Shows Asset Request Name --></help>
+        <label><!-- Request Name --></label>
+        <name>Request_Name__c</name>
+    </fields>
+    <fields>
+        <help><!-- It Shows Asset Request Status --></help>
+        <label><!-- Request Status --></label>
+        <name>Request_Status__c</name>
+        <picklistValues>
+            <masterLabel>Implemented</masterLabel>
+            <translation><!-- Implemented --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>In Review</masterLabel>
+            <translation><!-- In Review --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Pending</masterLabel>
+            <translation><!-- Pending --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- It Shows Request Type --></help>
+        <label><!-- Request Type --></label>
+        <name>Request_Type__c</name>
+        <picklistValues>
+            <masterLabel>Allocation</masterLabel>
+            <translation><!-- Allocation --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Purchase</masterLabel>
+            <translation><!-- Purchase --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Service/Repair</masterLabel>
+            <translation><!-- Service/Repair --></translation>
+        </picklistValues>
+    </fields>
+    <layouts>
+        <layout>Asset Requested Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Asset Allocation</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Asset Allocate</value>
+    </caseValues>
+    <fields>
+        <help><!-- Select Asset --></help>
+        <label><!-- Asset --></label>
+        <name>AM_Asset__c</name>
+        <relationshipLabel><!-- Asset Allocations --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Select Contact to whom you want to allocate Asset --></help>
+        <label><!-- Contact --></label>
+        <name>AM_Contact__c</name>
+        <relationshipLabel><!-- Asset Allocations --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Select Date when u want to End Allocation --></help>
+        <label><!-- End Date --></label>
+        <name>AM_End_Date__c</name>
+    </fields>
+    <fields>
+        <help><!-- Select Date when u want to Start Allocation --></help>
+        <label><!-- Start Date --></label>
+        <name>AM_Start_Date__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- Requested End Date must be later than requested Start Date --></errorMessage>
+        <name>Asset_Date_Range_Validation</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Asset Out Of Service, Not Possible Allocation --></errorMessage>
+        <name>Asset_Out_Of_Service</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Start Date cannot be in the past or future. --></errorMessage>
+        <name>Start_Date_should_be_Now</name>
+    </validationRules>
+</CustomObjectTranslation>

@@ -1,0 +1,483 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>true</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fieldSets>
+        <fullName>CAM_Asset_List_Filter</fullName>
+        <description>This is used in the Asset List page to generate the filter fields</description>
+        <displayedFields>
+            <field>AM_Type__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>AM_Location__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>AM_Price__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <label>CAM Asset List Filter</label>
+    </fieldSets>
+    <fieldSets>
+        <fullName>CAM_Asset_Search_Fields</fullName>
+        <description>This field set is used to set fields that are searched using the search field in the asset list page.</description>
+        <displayedFields>
+            <field>Item_Name__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Name</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>AM_Status__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>AM_Type__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <label>CAM Asset Search Fields</label>
+    </fieldSets>
+    <fields>
+        <fullName>AM_Available_From__c</fullName>
+        <description>This field shows Date value from Asset is available</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This field shows Date value from Asset is available</inlineHelpText>
+        <label>Available From</label>
+        <summarizedField>AM_Asset_Allocation__c.AM_End_Date__c</summarizedField>
+        <summaryForeignKey>AM_Asset_Allocation__c.AM_Asset__c</summaryForeignKey>
+        <summaryOperation>max</summaryOperation>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>AM_Available_for_allocation__c</fullName>
+        <description>This Field shows availability of Assets</description>
+        <externalId>false</externalId>
+        <formula>AND( OR(ISNULL( AM_Available_From__c ) , 
+    AND(NOT ISNULL( AM_Available_From__c ),
+        NOW() &gt; AM_Available_From__c )),  AM_Out_of_Service__c = false)</formula>
+        <inlineHelpText>This Field shows availability of Assets</inlineHelpText>
+        <label>Available For Allocation</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>AM_Comments__c</fullName>
+        <description>This field is for Asset Description</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Enter Asset Description</inlineHelpText>
+        <label>Item Description</label>
+        <length>32768</length>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>5</visibleLines>
+    </fields>
+    <fields>
+        <fullName>AM_ID__c</fullName>
+        <description>External ID for the asset</description>
+        <externalId>true</externalId>
+        <inlineHelpText>External ID for the asset</inlineHelpText>
+        <label>Model No.</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>AM_Location__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>This field is for Location Lookup</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This field is for Location Lookup</inlineHelpText>
+        <label>Location</label>
+        <referenceTo>AM_Location__c</referenceTo>
+        <relationshipLabel>Agile Assets</relationshipLabel>
+        <relationshipName>Assets</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>AM_Out_of_Service__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This checkbox is for Asset status which shows Out Of Service</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This checkbox is for Asset status which shows Out Of Service</inlineHelpText>
+        <label>Out of Service</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>AM_Price__c</fullName>
+        <description>This field is price</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Enter price</inlineHelpText>
+        <label>Price</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>AM_Status__c</fullName>
+        <description>Describes the status of an asset</description>
+        <externalId>false</externalId>
+        <formula>IF( AM_Available_for_allocation__c , &quot;Available&quot;, (IF ( AM_Out_of_Service__c ,&quot;Out Of Service&quot;,&quot;Assigned&quot;)))</formula>
+        <inlineHelpText>It shows status of an Asset</inlineHelpText>
+        <label>Status</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>AM_Type__c</fullName>
+        <description>This picklist contains value of asset type</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Select type of an Asset</inlineHelpText>
+        <label>Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Desktop</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Laptop</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Accessories</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Office Furniture</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Networking</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Domestic Items</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>General</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Book</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Chromebook</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Approximate_Purchase_Value__c</fullName>
+        <description>This is formula field shows approximate purchase value</description>
+        <externalId>false</externalId>
+        <formula>AM_Price__c  *  Quantity__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>This field calculates Approximate Purchase Value</inlineHelpText>
+        <label>Approximate Purchase Value</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Assigned__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This fields shows Assigned status of Asset</description>
+        <externalId>false</externalId>
+        <label>Assigned</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Available__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This field shows Availability of Assets</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This field shows Availability of Assets</inlineHelpText>
+        <label>Available</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Item_Name__c</fullName>
+        <description>This field is for Asset name</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Enter Asset Name</inlineHelpText>
+        <label>Item Name</label>
+        <length>100</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>OOSTest_Available__c</fullName>
+        <externalId>false</externalId>
+        <formula>OR( ISNULL( AM_Available_From__c ),
+  AND(NOT  ISNULL( AM_Available_From__c ),
+   NOW() &gt; AM_Available_From__c  ))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>OOSTest_Available</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Purchase_Date__c</fullName>
+        <description>This field is for Purchase Date of Asset</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Enter Date of purchase</inlineHelpText>
+        <label>Purchase Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Quantity__c</fullName>
+        <description>This field shows quantity of the asset items</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Enter Quantity of Asset</inlineHelpText>
+        <label>Quantity</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Total_Cost__c</fullName>
+        <description>This field shows Total cost</description>
+        <externalId>false</externalId>
+        <formula>Approximate_Purchase_Value__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>It calculates Total cost based on quantity</inlineHelpText>
+        <label>Total Cost</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Vendor__c</fullName>
+        <description>This field shows vendor name</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Enter Vendor Name</inlineHelpText>
+        <label>Vendor</label>
+        <length>25</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Vendors__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>This field id for vendor information</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Select Vendor name</inlineHelpText>
+        <label>Vendors</label>
+        <referenceTo>Contact</referenceTo>
+        <relationshipLabel>Assets</relationshipLabel>
+        <relationshipName>Assets</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <label>New Asset</label>
+    <listViews>
+        <fullName>All_Assets</fullName>
+        <columns>NAME</columns>
+        <columns>Item_Name__c</columns>
+        <columns>Purchase_Date__c</columns>
+        <columns>AM_Type__c</columns>
+        <columns>AM_Available_for_allocation__c</columns>
+        <columns>AM_Out_of_Service__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All Assets</label>
+    </listViews>
+    <nameField>
+        <displayFormat>A-{00000000}</displayFormat>
+        <label>Asset Number</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Agile Assets</pluralLabel>
+    <recordTypeTrackFeedHistory>false</recordTypeTrackFeedHistory>
+    <recordTypes>
+        <fullName>IT</fullName>
+        <active>true</active>
+        <description>Record Type for IT Iteams</description>
+        <label>IT</label>
+        <picklistValues>
+            <picklist>AM_Type__c</picklist>
+            <values>
+                <fullName>Accessories</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Chromebook</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Desktop</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Laptop</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Networking</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Infrastructure</fullName>
+        <active>true</active>
+        <description>Record Type for a Infrastructure</description>
+        <label>Infrastructure</label>
+        <picklistValues>
+            <picklist>AM_Type__c</picklist>
+            <values>
+                <fullName>Domestic Items</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Office Furniture</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Stationary</fullName>
+        <active>true</active>
+        <description>Record Type for Stationary Iteams</description>
+        <label>Stationary</label>
+        <picklistValues>
+            <picklist>AM_Type__c</picklist>
+            <values>
+                <fullName>Book</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>General</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <searchLayouts>
+        <customTabListAdditionalFields>Item_Name__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>AM_Comments__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>AM_Type__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>AM_Available_for_allocation__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>AM_Out_of_Service__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>AM_Status__c</customTabListAdditionalFields>
+        <lookupDialogsAdditionalFields>Item_Name__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>AM_Location__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>AM_Type__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>AM_Status__c</lookupDialogsAdditionalFields>
+        <searchFilterFields>Item_Name__c</searchFilterFields>
+        <searchFilterFields>AM_Type__c</searchFilterFields>
+        <searchFilterFields>AM_Available_From__c</searchFilterFields>
+        <searchFilterFields>AM_Status__c</searchFilterFields>
+        <searchResultsAdditionalFields>AM_Location__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>AM_Price__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>AM_Comments__c</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+    <startsWith>Vowel</startsWith>
+</CustomObject>

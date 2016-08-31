@@ -1,0 +1,245 @@
+<apex:page standardController="AM_Asset__c"  extensions="CAM_AssetAssignController" showHeader="false" sidebar="false" standardStylesheets="false" applyBodyTag="false" docType="html-5.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<apex:stylesheet value="{!URLFOR($Resource.Asset_Manager_Resources, 'CSS/style.css')}"/>
+<apex:includeScript value="{!URLFOR($Resource.Asset_Manager_Resources, 'JS/jquery.min.js')}"/>
+<script type='text/javascript' src='/canvas/sdk/js/publisher.js'></script>
+<script>
+
+    $(function(){
+
+        //Show the lookup button if launched from Home Page
+        if({!showLookUp})
+        {
+            $('#btnAssetLookUp').attr('style', 'display:inline');
+        }
+        //Hide the lookup if launched from Asset details
+        else
+        {
+            $('#btnAssetLookUp').attr('style', 'display:none');
+
+            //Hide Other details field as well
+            $('.hideInSmallScreen').css('display', 'none');
+
+        }
+
+        if( (typeof sforce != 'undefined') && (sforce != null) && !{!showLookup} ) {
+            // Salesforce1
+             $('[id*=btnAssign]').attr('style', 'display:none');
+             $('[id*=btnCancel]').attr('style', 'display:none');
+          } else {
+            // Desktop
+            $('[id*=btnAssign]').attr('style', 'display:inline');
+            $('[id*=btnCancel]').attr('style', 'display:inline');
+        }            
+    });
+
+    function openLookupPopup(objectType)
+    {
+        if(objectType == 'AM_Asset__c')  
+        {
+            $('#assetLookup').show();
+        }
+        else if(objectType == 'Contact')
+        {
+            $('#contactLookup').show(); 
+        }    
+
+    }
+                  
+    function fillInAsset(name, id, status, price, location, type)
+    {
+        $('[id*=selAssetId]').val(id);
+        $('[id*=selAssetName]').val(name);
+        $('[id*=selAssetPrice]').text(price);
+        $('[id*=selAssetLocation]').text(location);
+        $('[id*=selAssetType]').text(type);
+        $('#assetLookup').hide();
+    }
+
+    function fillInContact(name, id, email, phone)
+    {
+        $('[id*=selConId]').val(id);
+        $('[id*=selConName]').val(name);
+        $('[id*=selConEmail]').text(email);
+        $('[id*=selConPhone]').text(phone);
+        $('#contactLookup').hide();       
+    }
+
+    function hideLookUp(objectType)
+    {
+        if(objectType == 'AM_Asset__c')  
+        {
+            $('#assetLookup').hide();
+            hold();
+        }
+        else if(objectType == 'Contact')
+        {
+            $('#contactLookup').hide();
+        } 
+
+    } 
+
+    function refresh()
+    {
+        //Asset
+        if({!showLookUp})
+        {
+            $('[id*=selAssetId]').val(""); 
+            $('[id*=selAssetName]').val("");                       
+        }
+        $('[id*=selAssetPrice]').text("");
+        $('[id*=selAssetLocation]').text("");
+        $('[id*=selAssetType]').text("");
+
+        //Contact
+        $('[id*=selConId]').val("");
+        $('[id*=selConName]').val("");
+        $('[id*=selConEmail]').text("");
+        $('[id*=selConPhone]').text("");
+
+    } 
+
+    //publisher action related script
+    Sfdc.canvas.publisher.subscribe(
+        {
+            name: "publisher.showPanel", 
+            onData:function(e)
+            {
+                Sfdc.canvas.publisher.publish({name:"publisher.setValidForSubmit", payload:"true"});
+            }
+        }
+    );
+
+    Sfdc.canvas.publisher.subscribe(
+        {
+            name: "publisher.post",
+            onData: function(e)
+            {
+                createAllocation();
+            }
+        }
+    );
+
+    function closePopUp()
+    { 
+
+        closeConfirmation();
+
+        if( (typeof sforce != 'undefined') && (sforce != null)) {
+            // Salesforce1
+            Sfdc.canvas.publisher.publish(
+            { 
+                name: "publisher.close",
+                payload:{ refresh:"true" }
+            });
+        } 
+    }
+</script>
+    
+    <header>
+        <h1 class="hideInSmallScreen">{!$Label.AM_Organization_Name}</h1>
+        <h2>{!assetLabel} Assignment</h2> 
+    </header>
+    <!-- Error Message Display-->
+    <apex:repeat value="{!errorMessages}" var="msg" id="msgs" rows="1">
+        <apex:pageMessage summary="{!msg.Summary}" severity="Error"/>
+    </apex:repeat>
+
+    <div id="assetLookup"> <!-- Asset Lookup-->
+        <div class="lookup-contianer">
+        <c:AM_LookupComponent p_objType="{!HTMLENCODE('AM_Asset__c')}" p_assetstatus="{!HTMLENCODE('Available')}" p_recType="{!HTMLENCODE(assetRecordType)}"/>
+        </div>
+    </div> 
+    <div id="contactLookup"> <!-- Contact Lookup-->
+        <div class="lookup-contianer">
+        <c:AM_LookupComponent p_objType="{!HTMLENCODE('Contact')}" p_assetstatus="" p_recType=""/>
+        </div>
+    </div>
+    
+    <div id="assignBox">
+      <apex:form >
+       <!-- <apex:actionFunction action="{!runQuery}" name="hold"/> -->
+        <apex:pageBlock >
+            <div class="content-block"> <!-- Asset -->
+                <div class="input-set">
+                    <apex:outputLabel value="{!assetLabel}" />
+                    <apex:inputHidden value="{!assetId}" id="selAssetId" />
+                    <apex:inputText styleClass="lookup" size="40" value="{!assetName}" id="selAssetName" onFocus="this.blur()" disabled="false"/>
+                    <button id="btnAssetLookUp" onclick="openLookupPopup('AM_Asset__c'); return false">
+                      
+
+                        <span class="oneIcon">&#xe01b;</span></button>
+                </div>
+
+                <div class="input-set hideInSmallScreen">
+                    <apex:outputLabel value="Type " />
+                    <apex:outputText value="{!assetObject.AM_Type__c}" id="selAssetType"/>
+                </div>
+
+                <div class="input-set hideInSmallScreen">
+                    <apex:outputLabel value="Price " />
+                    <apex:outputText value="{!assetObject.AM_Price__c}" id="selAssetPrice"/>
+                </div> 
+
+                <div class="input-set hideInSmallScreen">
+                    <apex:outputLabel value="Location " />
+                    <apex:outputText value="{!assetObject.AM_Location__r.Name}" id="selAssetLocation"/>
+                </div> 
+
+                <div class="input-set">
+                    <apex:outputLabel value="Assign From "/>
+                    <apex:outputText value="{!allocationStartDateDisplay}" id="assignFrom"/>                 
+                </div>
+
+                <div class="input-set">
+                    <apex:outputLabel value="Assign To " />
+                    <apex:input type="datetime-local" value="{!allocationEndDate}" id="assignTo"/>     
+                </div>
+
+            </div>                                                             
+        </apex:pageBlock>
+        <apex:pageBlock >
+            <div class="content-block"> <!-- Contact -->
+                <div class="input-set">
+                    <apex:inputHidden value="{!contactId}" id="selConId" />
+                    <apex:outputLabel value="User Name: " for="selConName"/>                    
+                    <apex:inputText styleClass="lookup" size="40" value="{!contactName}" id="selConName" onFocus="this.blur()" disabled="false" /> <button onclick="openLookupPopup('Contact'); return false"><span class="oneIcon">&#xe01b;</span></button>  
+                </div>
+
+                <div class="input-set hideInSmallScreen">
+                    <apex:outputLabel value="Email: " />
+                    <apex:outputText value="{!contactObject.Email}" id="selConEmail"/>
+                </div>  
+
+                <div class="input-set hideInSmallScreen" id="phoneField">
+                    <apex:outputLabel value="Phone: " />
+                    <apex:outputText value="{!contactObject.Phone}" id="selConPhone"/><br/> 
+                </div>  
+                
+                <div class="button-group">
+                    <apex:commandButton id="btnAssign" action="{!createAllocation}" value="Assign"/>
+                    <apex:commandButton id="btnCancel" action="{!goHome}"  value="Cancel"/>
+                    <apex:commandButton id="btnRefresh" onclick="refresh();" value="Reset"/>
+                    <apex:commandButton value="Back" action="{!backMethod}"/>
+                </div> 
+                <apex:actionFunction name="createAllocation" action="{!createAllocation}"/>                                
+            </div>
+        </apex:pageBlock>
+        <apex:pageBlock rendered="{!showConfirmation}" id="confirmPopUp">
+            <div class="confirmation-container">
+                <div class='confirmation-window'>
+                    <div>
+                        <apex:outputText value="{0} Assigned Successfully!">
+                            <apex:param value="{!HTMLENCODE(assetLabel)}"/>
+                        </apex:outputText>
+                    </div>
+                    <apex:commandButton onclick="closePopUp();" styleClass="confirmation-button" reRender="confirmPopUp" value="Close"/>
+                </div>
+                <div class="confirmation-shade"></div>
+                <apex:actionFunction action="{!closeConfirmation}" name="closeConfirmation"/>
+            </div>
+        </apex:pageBlock>
+      </apex:form>
+      <br style="clear:both" />
+    </div>
+</apex:page>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>LMA Audit</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>LMA_Audit</value>
+    </caseValues>
+    <fields>
+        <help><!-- It Shows License assigned app name --></help>
+        <label><!-- App_Name --></label>
+        <name>App_Name__c</name>
+    </fields>
+    <fields>
+        <help><!-- Contact --></help>
+        <label><!-- Contact --></label>
+        <name>Contact__c</name>
+    </fields>
+    <fields>
+        <help><!-- It shows Expire Date for Licence --></help>
+        <label><!-- Expire_Date --></label>
+        <name>Expire_Date__c</name>
+    </fields>
+    <fields>
+        <help><!-- It shows Install Date for Licenced Application --></help>
+        <label><!-- Install_Date --></label>
+        <name>Install_Date__c</name>
+    </fields>
+    <fields>
+        <help><!-- It shows Licence key --></help>
+        <label><!-- License_Key --></label>
+        <name>License_Key__c</name>
+    </fields>
+    <fields>
+        <help><!-- It shows Licence Type --></help>
+        <label><!-- License_Type --></label>
+        <name>License_Type__c</name>
+    </fields>
+    <fields>
+        <help><!-- It Shows Number of Licence --></help>
+        <label><!-- No. of Seats --></label>
+        <name>No_of_Seats__c</name>
+    </fields>
+    <fields>
+        <help><!-- It shows Package Version --></help>
+        <label><!-- Package_Version --></label>
+        <name>Package_Version__c</name>
+    </fields>
+    <fields>
+        <help><!-- It shows perpetual field information --></help>
+        <label><!-- Perpetual --></label>
+        <name>Perpetual__c</name>
+    </fields>
+    <fields>
+        <help><!-- Show license status --></help>
+        <label><!-- Status --></label>
+        <name>Status__c</name>
+    </fields>
+    <fields>
+        <label><!-- Subscriber_Org_Id --></label>
+        <name>Subscriber_Org_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- User_ID --></label>
+        <name>User_ID__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

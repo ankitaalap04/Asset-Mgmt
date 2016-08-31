@@ -1,0 +1,161 @@
+<apex:page controller="CAM_HomeController" showHeader="false" sidebar="false" standardStylesheets="false" applyBodyTag="false">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<apex:stylesheet value="{!URLFOR($Resource.Asset_Manager_Resources, 'CSS/style.css')}"/>
+<apex:includeScript value="{!URLFOR($Resource.Asset_Manager_Resources, 'JS/jquery.min.js')}"/>
+<apex:includeScript value="{!URLFOR($Resource.Asset_Manager_Resources, 'JS/d3.v3.min.js')}"/>
+<apex:includeScript value="{!URLFOR($Resource.Asset_Manager_Resources, 'JS/donuts.js')}"/>
+<script>
+      
+    
+    //Load Donut Charts
+    $(function(){
+        $('.vf_donut').each(function(){
+            var thisData = $(this).data('var');
+            drawDonutChart(
+              '[data-var=' + thisData + ']',
+              parseFloat($('[data-var=' + thisData + ']').data('donut')), //Added parseFloat to ensure that percent is float
+              250,
+              250,
+              "-20%"
+            );
+        });
+
+    });
+</script>
+
+        <header>
+            <apex:variable var="recordCount" value="{!recordTypeCount}" rendered="{!recordTypeCount > 1}">
+                <div id="type-select">
+                     <p style="text-align:center"><apex:image url="{!$Resource.CG_Logo}" width="125" height="70" /></p>
+                <strong>Asset Type:</strong>
+                    <apex:form >
+                            <apex:selectList value="{!selectedRecordTypeId}" multiselect="false" size="3" >
+                            <apex:actionSupport event="onchange" action="{!refreshHomePage}"/>
+                            <apex:selectOptions value="{!recordTypeOptions}"/>
+                            </apex:selectList>
+                                                
+                    </apex:form>
+                </div>
+            </apex:variable>
+
+            <!-- Error Message Display-->
+            <apex:repeat value="{!errorMessages}" var="msg">
+                <apex:pageMessage summary="{!msg.Summary}" severity="Error"/>
+            </apex:repeat>
+         
+            <h1>
+                <a href="../home/home.jsp" style="text-decoration: none"><Font color="#1072b8" ><p style="text-align:center">{!$Label.AM_Organization_Name}</p></Font></a>  
+            </h1>
+            <h2>{!assetLabel} MANAGEMENT</h2>
+        </header>
+
+        <div id="donutBox">
+            
+            
+            
+            <div class="vf_donut" data-var="Available" data-count="{!availableCount}" data-donut="{!availablePercentage}" onclick="                    
+                    if( (typeof sforce != 'undefined') && (sforce != null) ) {
+                        sforce.one.navigateToURL('/apex/CAM_AssetListPage?assetStatus=Available&recType={!selectedRecordTypeId}');
+                    }
+                    else {
+                        window.location.href = 
+                                '/apex/CAM_AssetListPage?assetStatus=Available&recType={!selectedRecordTypeId}';
+                    }">
+                <span class='innerType'>Available</span>
+                <span class='innerCount'>{!availableCount}</span>
+            </div>
+            <div class="vf_donut" data-var="Assigned" data-count="{!assignedCount}" data-donut="{!assignedPercentage}" onclick="                    
+                    if( (typeof sforce != 'undefined') && (sforce != null) ) {
+                       
+                    }
+                    else {
+                        window.location.href = 
+                            '/apex/CAM_AssetListPage?assetStatus=Assigned&recType={!selectedRecordTypeId}';
+                    }">
+                  <span class='innerType'>Assigned</span>
+                  <span class='innerCount'>{!assignedCount}</span> 
+                
+                
+                
+            </div>     
+            <div class="vf_donut" data-var="Broken" data-count="{!outOfServiceCount}" data-donut="{!outOfServicePercentage}" onclick="                    
+                    if( (typeof sforce != 'undefined') && (sforce != null) ) {
+                        sforce.one.navigateToURL('/apex/CAM_AssetListPage?assetStatus=OutofService&recType={!selectedRecordTypeId}');
+                    }
+                    else {
+                        window.location.href = 
+                            '/apex/CAM_AssetListPage?assetStatus=OutofService&recType={!selectedRecordTypeId}';
+                    }">
+                <span class='innerType'>Broken</span>
+                <span class='innerCount'>{!outOfServiceCount}</span>
+            </div>
+        </div>
+    
+        <!-- Ankita Start -->
+         <!--   <p style="text-align:center">  
+            <div class="vf_donut" data-var="Total" data-count="{!totalCount}" data-donut="100" >
+                <span class='innerType'>Total</span>
+                <span class='innerCount'>{!totalCount}</span>
+            </div></p>-->
+           <!-- Ankita Finish -->
+
+        <div id="navBox">
+            <ul>
+                <li onclick="                    
+                    if( (typeof sforce != 'undefined') && (sforce != null) ) {
+                        sforce.one.navigateToURL('/apex/CAM_AssetAssignmentPage?recType={!selectedRecordTypeId}');
+                    }
+                    else {
+                        window.location.href = 
+                            '/apex/CAM_AssetAssignmentPage?recType={!selectedRecordTypeId}';
+                    }"
+                ><span>{!assetLabel} Assignment</span></li>
+
+                <li onclick="                    
+                    if( (typeof sforce != 'undefined') && (sforce != null) ) {
+                        sforce.one.navigateToURL('/apex/CAM_AssetListPage?recType={!selectedRecordTypeId}');
+                    }
+                    else {
+                        window.location.href = 
+                            '/apex/CAM_AssetListPage?recType={!selectedRecordTypeId}';
+                    }"><span>{!assetLabel} List</span></li>
+
+                <li onclick="                    
+                    if( (typeof sforce != 'undefined') && (sforce != null) ) {
+                       sforce.one.navigateToURL('{!URLFOR($Page.CAM_ContactListPage)}');
+                    }
+                    else {
+                        window.location.href = 
+                            '{!URLFOR($Page.CAM_ContactListPage)}'; 
+                    }"><span>User Search</span></li>
+
+                <li onclick="                    
+                    if( (typeof sforce != 'undefined') && (sforce != null) ) {
+                        sforce.one.navigateToURL('/apex/CAM_CasePage?recType={!selectedRecordTypeId}');
+                    }
+                    else {
+                        window.location.href = 
+                            '/apex/CAM_CasePage?recType={!selectedRecordTypeId}';
+                    }"><span>Report a Problem</span></li>
+            </ul>
+        </div><!-- Nav Box -->
+
+        <h3>ALERTS</h3>
+
+        <div id="alertBox">
+            <apex:repeat var="alert" value="{!caseList}">
+                <a href="javascript:void(0)" onclick="
+                    if( (typeof sforce != 'undefined') && (sforce != null) ) {
+                        sforce.one.navigateToSObject('{!alert.Id}');
+                    }
+                    else {
+                        window.location.href = 
+                            '{!URLFOR($Action.Service_Request__c.View, alert.Id)}';
+                    }"
+                >
+                    <div class="alertRepeat">{!alert.Subject__c} <span class="rightArrow oneIcon">&#xe006;</span></div>
+                </a>
+            </apex:repeat>
+        </div><!-- Alert Box -->
+</apex:page>

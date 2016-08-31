@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>This objects is to store data for out of service records</description>
+    <enableActivities>true</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>AM_Asset__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>This Lookup field stores Asset detail</description>
+        <externalId>false</externalId>
+        <inlineHelpText>It shows Asset detail</inlineHelpText>
+        <label>AM_Asset</label>
+        <referenceTo>AM_Asset__c</referenceTo>
+        <relationshipLabel>Service Requests</relationshipLabel>
+        <relationshipName>Service_Requests</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ClosedDate__c</fullName>
+        <description>This field stores close date for service request</description>
+        <externalId>false</externalId>
+        <inlineHelpText>It shows Close Date for service request</inlineHelpText>
+        <label>Date/Time Close</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>CreatedDate__c</fullName>
+        <description>This field stores created date for service request</description>
+        <externalId>false</externalId>
+        <inlineHelpText>It shows Created Date</inlineHelpText>
+        <label>Date/Time Opened</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Description__c</fullName>
+        <description>This field is to store Service Request description</description>
+        <externalId>false</externalId>
+        <inlineHelpText>It shows Service Request description</inlineHelpText>
+        <label>Description</label>
+        <length>32768</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>5</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Mark_Asset_as_out_of_service__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Checking this box will fire a trigger that will set the &quot;Out of service&quot; checkbox on the corresponding asset as True.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>it shows Asset status as Out Of Service</inlineHelpText>
+        <label>Mark Asset as out of service</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Priority__c</fullName>
+        <description>This field stores Priority os Service Request</description>
+        <externalId>false</externalId>
+        <inlineHelpText>It shows priority os service request</inlineHelpText>
+        <label>Priority</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Medium</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Low</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>High</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Status__c</fullName>
+        <description>It stores status of service request</description>
+        <externalId>false</externalId>
+        <inlineHelpText>It Shows Status of Service Request</inlineHelpText>
+        <label>Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>New</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Working</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Escalated</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Subject__c</fullName>
+        <description>It stores subject of service request</description>
+        <externalId>false</externalId>
+        <inlineHelpText>It Shows Subject of Service Request</inlineHelpText>
+        <label>Subject</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <label>Service Request</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>AM_Asset__c</columns>
+        <columns>Description__c</columns>
+        <columns>Status__c</columns>
+        <columns>CreatedDate__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <displayFormat>SR-{0000}</displayFormat>
+        <label>Service Request Number</label>
+        <trackHistory>false</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Service Requests</pluralLabel>
+    <searchLayouts>
+        <customTabListAdditionalFields>AM_Asset__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Subject__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Description__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Status__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Priority__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>CreatedDate__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>ClosedDate__c</customTabListAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+</CustomObject>

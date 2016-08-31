@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Location</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Asset Locations</value>
+    </caseValues>
+    <fields>
+        <help><!-- Enter Building Name --></help>
+        <label><!-- Building --></label>
+        <name>AM_Building__c</name>
+    </fields>
+    <fields>
+        <help><!-- Enter Floor --></help>
+        <label><!-- Floor --></label>
+        <name>AM_Floor__c</name>
+    </fields>
+    <fields>
+        <help><!-- Enter Position of Location --></help>
+        <label><!-- Position --></label>
+        <name>AM_Position__c</name>
+    </fields>
+    <fields>
+        <help><!-- Enter Zone for Location. --></help>
+        <label><!-- Zone --></label>
+        <name>AM_Zone__c</name>
+    </fields>
+    <layouts>
+        <layout>AM Location Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>
